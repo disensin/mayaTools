@@ -76,3 +76,5 @@ def speed_adjuster_ui():
                                                         specific_value = True,
                                                         value = speed,
                                                         printout = True))
+
+speed_adjuster_ui()
