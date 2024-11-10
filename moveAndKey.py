@@ -3,40 +3,176 @@ from maya import mel
 
 attr_dict = {}
 
-def set_key_then_frame(frame_forward=True,*args,**kwargs):
+import maya.cmds as cmds
+
+def create_hotkey_commands():
+    """
+    Creates hotkey commands and assigns them using Maya's hotkey editor.
+
+    This function defines a set of custom hotkey commands for controlling frame and keyframe navigation in Maya. It creates or updates nameCommands, runTimeCommands, and assigns hotkeys based on user-defined configurations.
+    """
+    hotkey_data = {
+        'Key_Prev6Frames': {
+            'annotation': 'Autokey, go to previous 6 Frames',
+            'command': 'cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)-6)',
+            'keyShortcut': '^',
+            'commandLanguage': 'python',
+            'altModifier': True
+        },
+        'Key_Next6Frames': {
+            'annotation': 'Autokey, go to next 6 Frames',
+            'command': 'cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)+6)',
+            'keyShortcut': '^',
+            'commandLanguage': 'python',
+            'altModifier': False
+        },
+        # ---
+        'Key_Prev5Frames': {
+            'annotation': 'Autokey, go to previous 5 Frames',
+            'command': 'cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)-5)',
+            'keyShortcut': '%',
+            'commandLanguage': 'python',
+            'altModifier': True
+        },
+        'Key_Next5Frames': {
+            'annotation': 'Autokey, go to next 5 Frames',
+            'command': 'cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)+5)',
+            'keyShortcut': '%',
+            'commandLanguage': 'python',
+            'altModifier': False
+        },
+        # ---
+        'Key_Prev4Frames': {
+            'annotation': 'Autokey, go to previous 4 Frames',
+            'command': 'cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)-4)',
+            'keyShortcut': '$',
+            'commandLanguage': 'python',
+            'altModifier': True
+        },
+        'Key_Next4Frames': {
+            'annotation': 'Autokey, go to next 4 Frames',
+            'command': 'cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)+4)',
+            'keyShortcut': '$',
+            'commandLanguage': 'python',
+            'altModifier': False
+        },
+        # ---
+        'Key_Prev3Frames': {
+            'annotation': 'Autokey, go to previous 3 Frames',
+            'command': 'cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)-3)',
+            'keyShortcut': '#',
+            'commandLanguage': 'python',
+            'altModifier': True
+        },
+        'Key_Next3Frames': {
+            'annotation': 'Autokey, go to next 3 Frames',
+            'command': 'cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)+3)',
+            'keyShortcut': '#',
+            'commandLanguage': 'python',
+            'altModifier': False
+        },
+        # ---
+        'Key_Prev2Frames': {
+            'annotation': 'Autokey, go to previous 2 Frames',
+            'command': 'cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)-2)',
+            'keyShortcut': '@',
+            'commandLanguage': 'python',
+            'altModifier': True
+        },
+        'Key_Next2Frames': {
+            'annotation': 'Autokey, go to next 2 Frames',
+            'command': 'cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)+2)',
+            'keyShortcut': '@',
+            'commandLanguage': 'python',
+            'altModifier': False
+        },
+        'Key_PrevFrame': {
+            'annotation': 'Autokey, go to previous Frame',
+            'command': 'autoKeyframe; nextOrPreviousFrame "previous"',
+            'keyShortcut': ',',
+            'commandLanguage': 'mel',
+            'altModifier': True
+        },
+        'Key_NextFrame': {
+            'annotation': 'Autokey, go to next Frame',
+            'command': 'autoKeyframe; nextOrPreviousFrame "next"',
+            'keyShortcut': '.',
+            'altModifier': True,
+            'commandLanguage': 'mel'
+        },
+        'Key_PrevKey': {
+            'annotation': 'Autokey, go to previous Keyframe',
+            'command': 'autoKeyframe; currentTime -edit (`playbackOptions -q -slp` ? `findKeyframe -timeSlider -which previous` : `findKeyframe -which previous`)',
+            'keyShortcut': ',',
+            'altModifier': False,
+            'commandLanguage': 'mel'
+        },
+        'Key_NextKey': {
+            'annotation': 'Autokey, go to next Keyframe',
+            'command': 'autoKeyframe; currentTime -edit (`playbackOptions -q -slp` ? `findKeyframe -timeSlider -which next` : `findKeyframe -which next`)',
+            'keyShortcut': '.',
+            'altModifier': False,
+            'commandLanguage': 'mel'
+        }
+    }
     
-    set_key_on_modified_attributes(objects=None)
-    
-    if frame_forward:
-        mel.eval('currentTime -edit (`playbackOptions -q -slp` ? `findKeyframe -timeSlider -which next` : `findKeyframe -which next`)')
-    else:
-        mel.eval('currentTime -edit (`playbackOptions -q -slp` ? `findKeyframe -timeSlider -which previous` : `findKeyframe -which previous`)')
-    
+    """
+    Dictionary Structure:
+    hotkey_data: dict
+        - Key (str): Unique identifier for the hotkey configuration.
+        - Values (dict): Contains configuration for each hotkey.
+            - annotation (str): Description of the hotkey command.
+            - command (str): The command to be executed by the hotkey.
+            - keyShortcut (str): The key to which the command will be assigned.
+            - commandLanguage (str): Language of the command ('mel' or 'python').
+            - altModifier (bool, optional): Indicates if the Alt key should be used as a modifier.
+            - ctrlModifier (bool, optional): Indicates if the Ctrl key should be used as a modifier.
+            - shiftModifier (bool, optional): Indicates if the Shift key should be used as a modifier.
+            - dragPress (bool, optional): Indicates if the hotkey should activate on drag press. Defaults to True.
+    """
 
-def set_key_on_modified_attributes(objects=None):
-    """Sets keys on only the attributes that have been modified."""
-    global attr_dict
+    for key, data in hotkey_data.items():
+        # Create a nameCommand for the hotkey
+        name_command = cmds.nameCommand(
+            key + 'NameCommand',
+            annotation=data['annotation'],
+            command=key,
+            sourceType='mel' if data['commandLanguage'] == 'mel' else 'python'
+        )
 
-    if not objects:
-        objects = cmds.ls(sl=True)
+        # Delete the existing runTimeCommand if it exists
+        if cmds.runTimeCommand(key, q=1, exists=1):
+            cmds.runTimeCommand(key, e=1, delete=1)
 
-    if not objects:
-        return
-    
-    for item in objects:
-        for attr in mc.listAttr(item,keyable=True) or []:
-            item_attr = item+'.'+attr
-            new_value = mc.getAttr(item_attr)
-            if item_attr in attr_dict and attr_dict[item_attr] != new_value:
-                mc.setKeyframe(item_attr)
-            attr_dict.setdefault(item_attr,new_value)
-            attr_dict[item_attr] = new_value
+        # Create a new runTimeCommand
+        cmds.runTimeCommand(
+            key,
+            annotation=data['annotation'],
+            category='Custom Scripts.ito-cuts',
+            command=data['command'],
+            commandLanguage=data['commandLanguage']
+        )
 
-mc.nameCommand('nextFrame_andKey',command='python("set_key_then_frame(frame_forward=True)")',annotation='Set Key while changing current Frame Forward.',)
-mc.nameCommand('previousFrame_andKey',command='python("set_key_then_frame(frame_forward=False)")',annotation='Set Key while changing current Frame Backward.',)
+        # Define the hotkey arguments
+        hotkey_kwargs = {
+            'altModifier': data.get('altModifier', False),
+            'ctrlModifier': data.get('ctrlModifier', False),
+            'shiftModifier': data.get('shiftModifier', False),
+            'dragPress': data.get('dragPress', True)
+        }
 
-mc.hotkey(keyShortcut='.', name='nextFrame_andKey', dragPress=True)
-mc.hotkey(keyShortcut=',', name='previousFrame_andKey', dragPress=True)
+        # Remove any existing hotkey assignment
+        if cmds.hotkey(data['keyShortcut'], q=1, **hotkey_kwargs):
+            cmds.hotkey(keyShortcut=data['keyShortcut'], name="")
+
+        # Assign the hotkey to the nameCommand
+        cmds.hotkey(
+            keyShortcut=data['keyShortcut'],
+            name=name_command,
+            **hotkey_kwargs
+        )
+
+create_hotkey_commands()
 
 aimer_group = ''
 aimed_item = ''
