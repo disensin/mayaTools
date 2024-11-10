@@ -1,0 +1,71 @@
+// Code generated from the MoKey.py file into MEL
+
+// Key_Prev6Frames
+nameCommand -annotation "Autokey, go to previous 6 Frames" -sourceType "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)-6)" Key_Prev6FramesNameCommand;
+runTimeCommand -annotation "Autokey, go to previous 6 Frames" -category "Custom Scripts.ito-cuts" -commandLanguage "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)-6)" Key_Prev6Frames;
+hotkey -keyShortcut "^" -alt true -name "Key_Prev6FramesNameCommand";
+
+// Key_Next6Frames
+nameCommand -annotation "Autokey, go to next 6 Frames" -sourceType "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)+6)" Key_Next6FramesNameCommand;
+runTimeCommand -annotation "Autokey, go to next 6 Frames" -category "Custom Scripts.ito-cuts" -commandLanguage "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)+6)" Key_Next6Frames;
+hotkey -keyShortcut "^" -name "Key_Next6FramesNameCommand";
+
+// Key_Prev5Frames
+nameCommand -annotation "Autokey, go to previous 5 Frames" -sourceType "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)-5)" Key_Prev5FramesNameCommand;
+runTimeCommand -annotation "Autokey, go to previous 5 Frames" -category "Custom Scripts.ito-cuts" -commandLanguage "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)-5)" Key_Prev5Frames;
+hotkey -keyShortcut "%" -alt true -name "Key_Prev5FramesNameCommand";
+
+// Key_Next5Frames
+nameCommand -annotation "Autokey, go to next 5 Frames" -sourceType "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)+5)" Key_Next5FramesNameCommand;
+runTimeCommand -annotation "Autokey, go to next 5 Frames" -category "Custom Scripts.ito-cuts" -commandLanguage "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)+5)" Key_Next5Frames;
+hotkey -keyShortcut "%" -name "Key_Next5FramesNameCommand";
+
+// Key_Prev4Frames
+nameCommand -annotation "Autokey, go to previous 4 Frames" -sourceType "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)-4)" Key_Prev4FramesNameCommand;
+runTimeCommand -annotation "Autokey, go to previous 4 Frames" -category "Custom Scripts.ito-cuts" -commandLanguage "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)-4)" Key_Prev4Frames;
+hotkey -keyShortcut "$" -alt true -name "Key_Prev4FramesNameCommand";
+
+// Key_Next4Frames
+nameCommand -annotation "Autokey, go to next 4 Frames" -sourceType "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)+4)" Key_Next4FramesNameCommand;
+runTimeCommand -annotation "Autokey, go to next 4 Frames" -category "Custom Scripts.ito-cuts" -commandLanguage "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)+4)" Key_Next4Frames;
+hotkey -keyShortcut "$" -name "Key_Next4FramesNameCommand";
+
+// Key_Prev3Frames
+nameCommand -annotation "Autokey, go to previous 3 Frames" -sourceType "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)-3)" Key_Prev3FramesNameCommand;
+runTimeCommand -annotation "Autokey, go to previous 3 Frames" -category "Custom Scripts.ito-cuts" -commandLanguage "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)-3)" Key_Prev3Frames;
+hotkey -keyShortcut "#" -alt true -name "Key_Prev3FramesNameCommand";
+
+// Key_Next3Frames
+nameCommand -annotation "Autokey, go to next 3 Frames" -sourceType "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)+3)" Key_Next3FramesNameCommand;
+runTimeCommand -annotation "Autokey, go to next 3 Frames" -category "Custom Scripts.ito-cuts" -commandLanguage "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)+3)" Key_Next3Frames;
+hotkey -keyShortcut "#" -name "Key_Next3FramesNameCommand";
+
+// Key_Prev2Frames
+nameCommand -annotation "Autokey, go to previous 2 Frames" -sourceType "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)-2)" Key_Prev2FramesNameCommand;
+runTimeCommand -annotation "Autokey, go to previous 2 Frames" -category "Custom Scripts.ito-cuts" -commandLanguage "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)-2)" Key_Prev2Frames;
+hotkey -keyShortcut "@" -alt true -name "Key_Prev2FramesNameCommand";
+
+// Key_Next2Frames
+nameCommand -annotation "Autokey, go to next 2 Frames" -sourceType "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)+2)" Key_Next2FramesNameCommand;
+runTimeCommand -annotation "Autokey, go to next 2 Frames" -category "Custom Scripts.ito-cuts" -commandLanguage "python" -command "cmds.autoKeyframe(); cmds.currentTime(cmds.currentTime(q=1)+2)" Key_Next2Frames;
+hotkey -keyShortcut "@" -name "Key_Next2FramesNameCommand";
+
+// Key_PrevFrame
+nameCommand -annotation "Autokey, go to previous Frame" -sourceType "mel" -command "autoKeyframe; nextOrPreviousFrame \"previous\"" Key_PrevFrameNameCommand;
+runTimeCommand -annotation "Autokey, go to previous Frame" -category "Custom Scripts.ito-cuts" -commandLanguage "mel" -command "autoKeyframe; nextOrPreviousFrame \"previous\"" Key_PrevFrame;
+hotkey -keyShortcut "," -alt true -name "Key_PrevFrameNameCommand";
+
+// Key_NextFrame
+nameCommand -annotation "Autokey, go to next Frame" -sourceType "mel" -command "autoKeyframe; nextOrPreviousFrame \"next\"" Key_NextFrameNameCommand;
+runTimeCommand -annotation "Autokey, go to next Frame" -category "Custom Scripts.ito-cuts" -commandLanguage "mel" -command "autoKeyframe; nextOrPreviousFrame \"next\"" Key_NextFrame;
+hotkey -keyShortcut "." -alt true -name "Key_NextFrameNameCommand";
+
+// Key_PrevKey
+nameCommand -annotation "Autokey, go to previous Keyframe" -sourceType "mel" -command "autoKeyframe; currentTime -edit (`playbackOptions -q -slp` ? `findKeyframe -timeSlider -which previous` : `findKeyframe -which previous`)" Key_PrevKeyNameCommand;
+runTimeCommand -annotation "Autokey, go to previous Keyframe" -category "Custom Scripts.ito-cuts" -commandLanguage "mel" -command "autoKeyframe; currentTime -edit (`playbackOptions -q -slp` ? `findKeyframe -timeSlider -which previous` : `findKeyframe -which previous`)" Key_PrevKey;
+hotkey -keyShortcut "," -name "Key_PrevKeyNameCommand";
+
+// Key_NextKey
+nameCommand -annotation "Autokey, go to next Keyframe" -sourceType "mel" -command "autoKeyframe; currentTime -edit (`playbackOptions -q -slp` ? `findKeyframe -timeSlider -which next` : `findKeyframe -which next`)" Key_NextKeyNameCommand;
+runTimeCommand -annotation "Autokey, go to next Keyframe" -category "Custom Scripts.ito-cuts" -commandLanguage "mel" -command "autoKeyframe; currentTime -edit (`playbackOptions -q -slp` ? `findKeyframe -timeSlider -which next` : `findKeyframe -which next`)" Key_NextKey;
+hotkey -keyShortcut "." -name "Key_NextKeyNameCommand";
